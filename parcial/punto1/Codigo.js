@@ -10,7 +10,7 @@ function sumarCuadros(arrayNumeros) {
       console.log(matriz);
 
     }
-    const result = "+"+"=".repeat(String(total).length)+"+";
+    const result = "+"+"-".repeat(String(total).length)+"+";
     matriz_total += `\n${result}\n|${total}|\n${result}\n`;
     return console.log(matriz_total);
 
