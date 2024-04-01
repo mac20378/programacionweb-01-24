@@ -1,18 +1,13 @@
 function sumarCuadros(arrayNumeros) {
+  let sum = 0;
     let total = 0;
-    let matriz = "";
-    let matriz_total ="";
     for (let i = 0; i < arrayNumeros.length; i++) {
-      const sum = arrayNumeros[i];
+      sum = arrayNumeros[i];
       total += sum;
-      const result = "+"+"-".repeat(String(sum).length)+"+";
-      matriz += `\n${result}\n|${sum}|\n${result}\n`;
-      console.log(matriz);
+      console.log(`+${sum}+`);
 
     }
-    const result = "+"+"-".repeat(String(total).length)+"+";
-    matriz_total += `\n${result}\n|${total}|\n${result}\n`;
-    return console.log(matriz_total);
+    return console.log(`+${total}+`);
 
 }
   
