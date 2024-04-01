@@ -34,7 +34,7 @@ function App() {
       return(
         <div key={personas.identify}>
           
-          
+          <H1>no hay diseño ":("</H1>
           
           
           
