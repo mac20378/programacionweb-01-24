@@ -3,16 +3,13 @@ const {
   CreateUser,
   FindOneUsername,
 } = require("../repository/usuariosRepositorio");
+const { Response } = require("../Utils/response");
 
 async function crearUsuarios(req, res) {
   const params = req.body;
 
   const user = new UserioModelo();
 
-  if (!params.usuario || !params.password || !params.email) {
-    res.status(400).send({ message: "Todos los campos son requeridos" });
-    return;
-  }
 
   try {
     user.email = params.email;
@@ -20,15 +17,27 @@ async function crearUsuarios(req, res) {
     user.password = params.password;
 
     const response = await CreateUser(user);
-    res.status(response.status).send(response);
-  } catch (error) {
-    console.error("Error al crear usuario:", error);
-    res.status(500).send({ message: "Error interno del servidor" });
+    if (response) {
+      Response.status = 201;
+      Response.message = "Datos guardados correctamente en la base de datos";
+      Response.result = response;
+      res.status(201).send(
+          Response
+      );
   }
+  } catch (err) {
+    console.log(err);
+    Response.status = 500;
+    Response.message = err.message;
+    res.status(500).send(
+        Response
+    );
+}
 }
 
 async function loginUsuarios(req, res) {
   const params = req.body;
+
 
   if (!params.usuario || !params.password) {
     return res

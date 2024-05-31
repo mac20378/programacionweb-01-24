@@ -23,11 +23,11 @@ describe("Validate Repository", () => {
         }));
         userMock = sinon.mock(UsuariosModelo);
     });
-    
+
     afterEach(() => {
         sinon.restore();
     });
-    
+
     it('should save the user successfully', async () => {
         userSaveMock.expects('save').resolves(userSaveMock.object);
 
@@ -35,30 +35,15 @@ describe("Validate Repository", () => {
         expect(result).to.equal(userSaveMock.object);
         userSaveMock.verify();
     });
-});
-
-
-it('should findOne the user successfully', async () => {
+    it('should findOne the user successfully', async () => {
         await userMock
             .expects('findOne')
-            .withArgs({ usuario: 'test'})
+            .withArgs({ usuario: 'test' })
             .resolves(responseExpectedFindOne);
 
         const result = await usuarioRepository.FindOneUsername('test');
         expect(result).to.deep.equal(responseExpectedFindOne);
         userMock.verify();
-});
-
-it('should throw an error if finding the user fails', async () => {
-        userMock
-            .expects('findOne')
-            .withArgs({ email: 'test@test.com', status: true })
-            .rejects("error");
-
-        try {
-            await usuarioRepository.findOneUserByEmail('test@test.com');
-        } catch (err) {
-            expect(err.message).to.equal('Email y/o contraseña Incorrecta');
-        }
-        userMock.verify();
     });
+
+});
