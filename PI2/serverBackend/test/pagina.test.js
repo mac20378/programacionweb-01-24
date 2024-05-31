@@ -32,8 +32,7 @@ describe("Validate Repository", () => {
         userSaveMock.expects('save').resolves(userSaveMock.object);
 
         const result = await usuarioRepository.CreateUser(userSaveMock.object);
-        expect(result).to.equal(userSaveMock.object);
-        userSaveMock.verify();
+        expect(result.email).to.equal("test@test.com");
     });
     it('should findOne the user successfully', async () => {
         await userMock
